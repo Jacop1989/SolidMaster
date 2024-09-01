@@ -1,0 +1,13 @@
+# Ignore Visual Studio files
+.vs/
+*.user
+*.suo
+*.VC.db
+
+# Ignore build output directories
+Debug/
+Release/
+
+# Ignore other system files
+*.DS_Store
+Thumbs.db
