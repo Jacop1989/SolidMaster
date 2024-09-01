@@ -5,15 +5,27 @@
 // Example of parsing the header
 void parseHeader(unsigned char* buffer) {
     printf("Parsing Header Information:\n");
-    // Add code here to interpret the header data
-    for (int i = 0; i < 8; i++) {
-        printf("%02X ", buffer[i]);
-    }
-    printf("\n");
+
+    // Example: Extracting file version from the header
+    printf("File Version: %02X %02X\n", buffer[0], buffer[1]);
+
+    // Extract other important information as needed
+    // ...
+}
+
+// Example of parsing metadata (if needed)
+void parseMetadata(unsigned char* buffer) {
+    printf("Parsing Metadata Information:\n");
+
+    // Example: Extracting file name from metadata
+    printf("File Name: %s\n", buffer + 10);  // Assuming the file name starts at byte 10
+
+    // Extract creation or modification date, etc.
+    // ...
 }
 
 int main() {
-    // Comment out the Unicode setting for now
+    // Comment out the Unicode setting if not needed
     // _setmode(_fileno(stdout), _O_WTEXT);  // Set mode to handle Unicode
 
     FILE* file;
@@ -26,7 +38,7 @@ int main() {
     unsigned char buffer[256];
     size_t bytesRead;
 
-    // Read data from the file
+    // Read data from the file and display in Hex format
     while ((bytesRead = fread(buffer, 1, sizeof(buffer), file)) > 0) {
         for (size_t i = 0; i < bytesRead; i++) {
             printf("%02X ", buffer[i]); // Print data in Hex format
@@ -36,6 +48,9 @@ int main() {
 
     // Call the header parsing function after reading the first 256 bytes
     parseHeader(buffer);
+
+    // Call the metadata parsing function (if needed)
+    parseMetadata(buffer);
 
     fclose(file);
     return 0;
